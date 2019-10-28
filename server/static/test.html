@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>JxBrowser Testing</title>
+  <link href="app.css" rel="stylesheet"></head>
+  <body>
+    <div id="root"></div>
+    <div>
+      <p>
+        <span>Integer:</span><span id="intSpan"> </span>
+      </p>
+      <p>
+        <span>Float:</span><span id="floatSpan"> </span>
+      </p>
+      <p>
+        <span>String:</span><span id="stringSpan"> </span>
+      </p>
+      <p>
+        <span>Object:</span><span id="objectSpan"> </span>
+      </p>
+    </div>
+
+  <script>
+    window._int = 23;
+    window._float = 2.3;
+    window._string = "abc121";
+    window._object = {
+      aKey: "stringValue" ,
+      aFunc: () => "window._object.aFunc() was called!"
+    };
+    window._null = null;
+    window._func = () => "hi";
+    window._array = ["2", 3];
+
+    const rootElement = document.getElementById("root");
+
+    const intSpan = document.getElementById("intSpan");
+    intSpan.innerText = window._int;
+    const floatSpan = document.getElementById("floatSpan");
+    floatSpan.innerText = window._float;
+    const stringSpan = document.getElementById("stringSpan");
+    stringSpan.innerText = window._string;
+    const objectSpan = document.getElementById("objectSpan");
+    objectSpan.innerText = JSON.stringify(window._object);
+
+  </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.10.2/umd/react.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.10.2/umd/react-dom.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+    <script type="text/babel">
+      class Greeting extends React.Component {
+
+        constructor(props) {
+          super(props);
+          this.onDrop = this.onDrop.bind(this);
+        }
+
+        onDrop(e) {
+          console.log("drop event received!");
+          e.preventDefault();
+          e.stopPropagation();
+          console.log(`onDrop() happened, type was ${e.dataTypes}`);
+        }
+
+        render() {
+          console.log("rendering Greeting");
+          return (<h2 style={{"border": "1px solid blue", "height": "160px"}} onDrop={this.onDrop} >Drop Something In Blue Box!</h2>);
+        }
+      }
+      ReactDOM.render(
+              <Greeting/>,
+              document.getElementById('root')
+      );
+    </script>
+  </body>
+</html>
