@@ -22,3 +22,7 @@ dependencies {
     }
 }
 
+tasks.wrapper {
+    distributionType = Wrapper.DistributionType.ALL
+    gradleVersion = "5.6.3"
+}
