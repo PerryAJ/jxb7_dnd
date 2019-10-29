@@ -55,18 +55,33 @@
         constructor(props) {
           super(props);
           this.onDrop = this.onDrop.bind(this);
+          this.onDragEnter = this.onDragEnter.bind(this);
+          this.onDragOver = this.onDragOver.bind(this);
+        }
+
+        onDragOver(e) {
+            e.preventDefault();
         }
 
         onDrop(e) {
           console.log("drop event received!");
+          console.log(`types: ${JSON.stringify(e.dataTransfer.types)}`);
+          console.log(`items: ${JSON.stringify(e.dataTransfer.items)}`);
+          console.log(`files: ${JSON.stringify(e.dataTransfer.files)}`);
           e.preventDefault();
           e.stopPropagation();
+          e.persist();
+          console.log(e);
           console.log(`onDrop() happened, type was ${e.dataTypes}`);
+        }
+
+        onDragEnter(e) {
+          e.preventDefault();
         }
 
         render() {
           console.log("rendering Greeting");
-          return (<h2 style={{"border": "1px solid blue", "height": "160px"}} onDrop={this.onDrop} >Drop Something In Blue Box!</h2>);
+          return (<h2 style={{"border": "1px solid blue", "height": "160px"}} onDrop={this.onDrop} onDragEnter={this.onDragEnter} onDragOver={this.onDragEnter} >Drop Something In Blue Box!</h2>);
         }
       }
       ReactDOM.render(

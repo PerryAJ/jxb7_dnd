@@ -25,16 +25,8 @@ class ItemTransferHandler extends TransferHandler {
 
     @Override
     protected Transferable createTransferable(JComponent c) {
-
         // just some simple example string contents
-
-        String fakeJson = "{ \n"
-                          + "    \"type\":  \"some string value\",\n"
-                          + "    \"another\": {\n"
-                          + "        \"someDeeperChild\": \"with a string value\"\n"
-                          + "    },\n"
-                          + "    \"andSomeNumber\": 54321\n"
-                          + "}\n";
+        String fakeJson = "{ \"type\": \"someType\", \"payload\": 1234 }";
         return new StringSelection(fakeJson);
     }
 

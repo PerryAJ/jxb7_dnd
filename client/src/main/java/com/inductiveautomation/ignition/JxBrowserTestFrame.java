@@ -14,6 +14,7 @@ import com.teamdev.jxbrowser.browser.Browser;
 import com.teamdev.jxbrowser.browser.event.ConsoleMessageReceived;
 import com.teamdev.jxbrowser.engine.Engine;
 import com.teamdev.jxbrowser.js.ConsoleMessageLevel;
+import com.teamdev.jxbrowser.navigation.event.LoadFinished;
 import com.teamdev.jxbrowser.view.swing.BrowserView;
 import net.miginfocom.swing.MigLayout;
 
@@ -27,6 +28,7 @@ class JxBrowserTestFrame extends JFrame implements ActionListener {
     DroppableButton dragDropButton = new DroppableButton("DragNDrop Me");
     private BrowserView view;
     private Browser browser;
+    private Browser debugBrowser;
     private JTextField urlField;
 
     JxBrowserTestFrame(Engine engine) {
@@ -82,7 +84,15 @@ class JxBrowserTestFrame extends JFrame implements ActionListener {
     private void navigate() {
         System.out.println("Navigating to " + urlField.getText());
         view.getBrowser().navigation().loadUrl(urlField.getText());
-        view.getBrowser().devTools().remoteDebuggingUrl().ifPresent(url -> System.out.println("Debug url: " + url));
+        view.getBrowser().navigation().on(LoadFinished.class, l -> {
+            view.getBrowser()
+                .devTools()
+                .remoteDebuggingUrl()
+                .ifPresent(url -> {
+                    System.out.println("Debug url: " + url);
+                });
+            }
+        );
     }
 
     @Override

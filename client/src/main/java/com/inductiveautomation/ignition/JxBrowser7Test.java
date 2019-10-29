@@ -28,7 +28,7 @@ public class JxBrowser7Test {
         String chromiumDirectory = System.getProperty("user.home") + File.separator + ".jxbrowser";
 
         EngineOptions options = EngineOptions.newBuilder(RenderingMode.HARDWARE_ACCELERATED)
-            .remoteDebuggingPort(9222)
+            .remoteDebuggingPort(9333)
             .language(Language.ENGLISH_US)
             .licenseKey(license)
             .chromiumDir(Paths.get(chromiumDirectory))
@@ -39,8 +39,6 @@ public class JxBrowser7Test {
 
         JxBrowserTestFrame frame = new JxBrowserTestFrame(engine);
     }
-
-
 }
 
 
